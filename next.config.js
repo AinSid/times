@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// Trigger new deployment after Git connection
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
