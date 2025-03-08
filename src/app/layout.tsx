@@ -2,6 +2,7 @@ import React from 'react';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 const spaceGrotesk = Space_Grotesk({ 
@@ -27,6 +28,7 @@ export default function RootLayout({
       </head>
       <body className="bg-background antialiased">
         {children}
+        <Analytics />
       </body>
     </html>
   );
