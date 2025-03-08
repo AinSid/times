@@ -104,8 +104,8 @@ export default function Home() {
 
       {/* Main Content with enhanced layout and animations */}
       <div className="max-w-lg mx-auto px-6 relative z-10 flex flex-col items-center min-h-[100dvh]" style={{ zIndex: 2 }}>
-        <div className="flex-[1]" />
-        <div className="text-center mb-auto space-y-12 animate-fade-in-up">
+        <div className="flex-[1.1]" />
+        <div className="text-center mb-auto space-y-11 animate-fade-in-up">
           <div className="space-y-3">
             <h1 className="text-[2rem] sm:text-[2.25rem] text-foreground/90 text-shadow font-medium leading-tight">
               Ramadan Prayer Times
@@ -138,18 +138,63 @@ export default function Home() {
             {isOpen && (
               <div className="absolute top-full left-0 right-0 mt-2 animate-fade-in">
                 <div className="bg-[#fff8f5]/95 backdrop-blur-lg rounded-[1.125rem] border border-primary/10 shadow-[0_8px_24px_rgba(0,0,0,0.08)] overflow-hidden">
-                  <Link 
-                    href="/times/los-angeles"
-                    className="block px-7 py-3 text-[0.9375rem] text-foreground/90 hover:bg-primary/10 transition-colors"
-                  >
-                    Los Angeles
-                  </Link>
-      <Link 
-                    href="/times/new-york"
-                    className="block px-7 py-3 text-[0.9375rem] text-foreground/90 hover:bg-primary/10 transition-colors"
-      >
-                    New York City
-      </Link>
+                  <div className="grid grid-cols-2 divide-x divide-primary/10">
+                    {/* First Column */}
+                    <div className="flex flex-col space-y-0.5 pr-4">
+                      <Link
+                        href="/times/los-angeles"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        Los Angeles
+                      </Link>
+                      <Link
+                        href="/times/new-york"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        New York City
+                      </Link>
+                      <Link
+                        href="/times/austin"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        Austin
+                      </Link>
+                      <Link
+                        href="/times/philadelphia"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        Philadelphia
+                      </Link>
+                    </div>
+
+                    {/* Second Column */}
+                    <div className="flex flex-col space-y-0.5 pl-4">
+                      <Link
+                        href="/times/san-francisco"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        San Francisco
+                      </Link>
+                      <Link
+                        href="/times/seattle"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        Seattle
+                      </Link>
+                      <Link
+                        href="/times/karachi"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        Karachi
+                      </Link>
+                      <Link
+                        href="/times/dhaka"
+                        className="px-4 py-2 rounded-lg text-[0.9375rem] text-foreground/90 hover:bg-primary/[0.06] transition-colors"
+                      >
+                        Dhaka
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}

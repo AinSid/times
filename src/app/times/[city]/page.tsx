@@ -17,442 +17,49 @@ type CityTimes = {
   [date: string]: PrayerTime;
 };
 
-type PrayerTimes = {
-  [city: string]: {
-    startDate: string;
-    times: CityTimes;
-  };
-};
-
-// Prayer times data from CSV files
-const mockPrayerTimes: PrayerTimes = {
-  'los-angeles': {
-    startDate: '2024-03-01',
-    times: {
-      '2024-03-01': {
-        fajr: '05:12 AM',
-        dhuhr: '12:06 PM',
-        asr: '04:10 PM',
-        maghrib: '05:50 PM',
-        isha: '06:59 PM',
-      },
-      '2024-03-02': {
-        fajr: '05:11 AM',
-        dhuhr: '12:05 PM',
-        asr: '04:11 PM',
-        maghrib: '05:51 PM',
-        isha: '07:00 PM',
-      },
-      '2024-03-03': {
-        fajr: '05:10 AM',
-        dhuhr: '12:05 PM',
-        asr: '04:11 PM',
-        maghrib: '05:52 PM',
-        isha: '07:01 PM',
-      },
-      '2024-03-04': {
-        fajr: '05:09 AM',
-        dhuhr: '12:05 PM',
-        asr: '04:12 PM',
-        maghrib: '05:53 PM',
-        isha: '07:02 PM',
-      },
-      '2024-03-05': {
-        fajr: '05:07 AM',
-        dhuhr: '12:05 PM',
-        asr: '04:13 PM',
-        maghrib: '05:54 PM',
-        isha: '07:02 PM',
-      },
-      '2024-03-06': {
-        fajr: '05:06 AM',
-        dhuhr: '12:05 PM',
-        asr: '04:13 PM',
-        maghrib: '05:54 PM',
-        isha: '07:03 PM',
-      },
-      '2024-03-07': {
-        fajr: '05:05 AM',
-        dhuhr: '12:04 PM',
-        asr: '04:14 PM',
-        maghrib: '05:55 PM',
-        isha: '07:04 PM',
-      },
-      '2024-03-08': {
-        fajr: '05:03 AM',
-        dhuhr: '12:04 PM',
-        asr: '04:15 PM',
-        maghrib: '05:56 PM',
-        isha: '07:05 PM',
-      },
-      '2024-03-09': {
-        fajr: '06:03 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:15 PM',
-        maghrib: '06:56 PM',
-        isha: '08:05 PM',
-      },
-      '2024-03-10': {
-        fajr: '06:02 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:15 PM',
-        maghrib: '06:57 PM',
-        isha: '08:06 PM',
-      },
-      '2024-03-11': {
-        fajr: '06:01 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:16 PM',
-        maghrib: '06:58 PM',
-        isha: '08:06 PM',
-      },
-      '2024-03-12': {
-        fajr: '05:59 AM',
-        dhuhr: '01:03 PM',
-        asr: '05:16 PM',
-        maghrib: '06:58 PM',
-        isha: '08:07 PM',
-      },
-      '2024-03-13': {
-        fajr: '05:58 AM',
-        dhuhr: '01:03 PM',
-        asr: '05:17 PM',
-        maghrib: '06:59 PM',
-        isha: '08:08 PM',
-      },
-      '2024-03-14': {
-        fajr: '05:57 AM',
-        dhuhr: '01:03 PM',
-        asr: '05:18 PM',
-        maghrib: '07:00 PM',
-        isha: '08:09 PM',
-      },
-      '2024-03-15': {
-        fajr: '05:55 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:18 PM',
-        maghrib: '07:01 PM',
-        isha: '08:10 PM',
-      },
-      '2024-03-16': {
-        fajr: '05:54 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:19 PM',
-        maghrib: '07:02 PM',
-        isha: '08:10 PM',
-      },
-      '2024-03-17': {
-        fajr: '05:53 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:19 PM',
-        maghrib: '07:02 PM',
-        isha: '08:11 PM',
-      },
-      '2024-03-18': {
-        fajr: '05:51 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:20 PM',
-        maghrib: '07:03 PM',
-        isha: '08:12 PM',
-      },
-      '2024-03-19': {
-        fajr: '05:50 AM',
-        dhuhr: '01:01 PM',
-        asr: '05:20 PM',
-        maghrib: '07:04 PM',
-        isha: '08:13 PM',
-      },
-      '2024-03-20': {
-        fajr: '05:48 AM',
-        dhuhr: '01:01 PM',
-        asr: '05:21 PM',
-        maghrib: '07:05 PM',
-        isha: '08:14 PM',
-      },
-      '2024-03-21': {
-        fajr: '05:47 AM',
-        dhuhr: '01:01 PM',
-        asr: '05:22 PM',
-        maghrib: '07:05 PM',
-        isha: '08:15 PM',
-      },
-      '2024-03-22': {
-        fajr: '05:45 AM',
-        dhuhr: '01:00 PM',
-        asr: '05:22 PM',
-        maghrib: '07:06 PM',
-        isha: '08:15 PM',
-      },
-      '2024-03-23': {
-        fajr: '05:44 AM',
-        dhuhr: '01:00 PM',
-        asr: '05:23 PM',
-        maghrib: '07:07 PM',
-        isha: '08:16 PM',
-      },
-      '2024-03-24': {
-        fajr: '05:43 AM',
-        dhuhr: '01:00 PM',
-        asr: '05:23 PM',
-        maghrib: '07:08 PM',
-        isha: '08:17 PM',
-      },
-      '2024-03-25': {
-        fajr: '05:41 AM',
-        dhuhr: '01:00 PM',
-        asr: '05:24 PM',
-        maghrib: '07:09 PM',
-        isha: '08:18 PM',
-      },
-      '2024-03-26': {
-        fajr: '05:40 AM',
-        dhuhr: '12:59 PM',
-        asr: '05:24 PM',
-        maghrib: '07:09 PM',
-        isha: '08:19 PM',
-      },
-      '2024-03-27': {
-        fajr: '05:38 AM',
-        dhuhr: '12:59 PM',
-        asr: '05:25 PM',
-        maghrib: '07:10 PM',
-        isha: '08:20 PM',
-      },
-      '2024-03-28': {
-        fajr: '05:37 AM',
-        dhuhr: '12:59 PM',
-        asr: '05:25 PM',
-        maghrib: '07:11 PM',
-        isha: '08:20 PM',
-      },
-      '2024-03-29': {
-        fajr: '05:35 AM',
-        dhuhr: '12:58 PM',
-        asr: '05:25 PM',
-        maghrib: '07:12 PM',
-        isha: '08:21 PM',
-      }
-    }
-  },
-  'new-york': {
-    startDate: '2024-03-01',
-    times: {
-      '2024-03-01': {
-        fajr: '05:14 AM',
-        dhuhr: '12:08 PM',
-        asr: '04:04 PM',
-        maghrib: '05:48 PM',
-        isha: '07:03 PM',
-      },
-      '2024-03-02': {
-        fajr: '05:12 AM',
-        dhuhr: '12:08 PM',
-        asr: '04:05 PM',
-        maghrib: '05:49 PM',
-        isha: '07:04 PM',
-      },
-      '2024-03-03': {
-        fajr: '05:11 AM',
-        dhuhr: '12:08 PM',
-        asr: '04:06 PM',
-        maghrib: '05:50 PM',
-        isha: '07:06 PM',
-      },
-      '2024-03-04': {
-        fajr: '05:09 AM',
-        dhuhr: '12:08 PM',
-        asr: '04:07 PM',
-        maghrib: '05:51 PM',
-        isha: '07:07 PM',
-      },
-      '2024-03-05': {
-        fajr: '05:07 AM',
-        dhuhr: '12:08 PM',
-        asr: '04:08 PM',
-        maghrib: '05:52 PM',
-        isha: '07:08 PM',
-      },
-      '2024-03-06': {
-        fajr: '05:06 AM',
-        dhuhr: '12:07 PM',
-        asr: '04:09 PM',
-        maghrib: '05:53 PM',
-        isha: '07:09 PM',
-      },
-      '2024-03-07': {
-        fajr: '05:04 AM',
-        dhuhr: '12:07 PM',
-        asr: '04:10 PM',
-        maghrib: '05:55 PM',
-        isha: '07:10 PM',
-      },
-      '2024-03-08': {
-        fajr: '05:03 AM',
-        dhuhr: '12:07 PM',
-        asr: '04:11 PM',
-        maghrib: '05:56 PM',
-        isha: '07:11 PM',
-      },
-      '2024-03-09': {
-        fajr: '06:03 AM',
-        dhuhr: '01:07 PM',
-        asr: '05:11 PM',
-        maghrib: '06:56 PM',
-        isha: '08:11 PM',
-      },
-      '2024-03-10': {
-        fajr: '06:01 AM',
-        dhuhr: '01:07 PM',
-        asr: '05:12 PM',
-        maghrib: '06:57 PM',
-        isha: '08:12 PM',
-      },
-      '2024-03-11': {
-        fajr: '05:59 AM',
-        dhuhr: '01:06 PM',
-        asr: '05:13 PM',
-        maghrib: '06:58 PM',
-        isha: '08:13 PM',
-      },
-      '2024-03-12': {
-        fajr: '05:58 AM',
-        dhuhr: '01:06 PM',
-        asr: '05:14 PM',
-        maghrib: '06:59 PM',
-        isha: '08:14 PM',
-      },
-      '2024-03-13': {
-        fajr: '05:56 AM',
-        dhuhr: '01:06 PM',
-        asr: '05:14 PM',
-        maghrib: '07:00 PM',
-        isha: '08:16 PM',
-      },
-      '2024-03-14': {
-        fajr: '05:54 AM',
-        dhuhr: '01:06 PM',
-        asr: '05:15 PM',
-        maghrib: '07:01 PM',
-        isha: '08:17 PM',
-      },
-      '2024-03-15': {
-        fajr: '05:53 AM',
-        dhuhr: '01:05 PM',
-        asr: '05:16 PM',
-        maghrib: '07:02 PM',
-        isha: '08:18 PM',
-      },
-      '2024-03-16': {
-        fajr: '05:51 AM',
-        dhuhr: '01:05 PM',
-        asr: '05:17 PM',
-        maghrib: '07:03 PM',
-        isha: '08:19 PM',
-      },
-      '2024-03-17': {
-        fajr: '05:49 AM',
-        dhuhr: '01:05 PM',
-        asr: '05:18 PM',
-        maghrib: '07:04 PM',
-        isha: '08:20 PM',
-      },
-      '2024-03-18': {
-        fajr: '05:48 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:19 PM',
-        maghrib: '07:05 PM',
-        isha: '08:21 PM',
-      },
-      '2024-03-19': {
-        fajr: '05:46 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:19 PM',
-        maghrib: '07:07 PM',
-        isha: '08:22 PM',
-      },
-      '2024-03-20': {
-        fajr: '05:44 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:20 PM',
-        maghrib: '07:08 PM',
-        isha: '08:24 PM',
-      },
-      '2024-03-21': {
-        fajr: '05:42 AM',
-        dhuhr: '01:04 PM',
-        asr: '05:21 PM',
-        maghrib: '07:09 PM',
-        isha: '08:25 PM',
-      },
-      '2024-03-22': {
-        fajr: '05:41 AM',
-        dhuhr: '01:03 PM',
-        asr: '05:22 PM',
-        maghrib: '07:10 PM',
-        isha: '08:26 PM',
-      },
-      '2024-03-23': {
-        fajr: '05:39 AM',
-        dhuhr: '01:03 PM',
-        asr: '05:23 PM',
-        maghrib: '07:11 PM',
-        isha: '08:27 PM',
-      },
-      '2024-03-24': {
-        fajr: '05:37 AM',
-        dhuhr: '01:03 PM',
-        asr: '05:23 PM',
-        maghrib: '07:12 PM',
-        isha: '08:28 PM',
-      },
-      '2024-03-25': {
-        fajr: '05:35 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:24 PM',
-        maghrib: '07:13 PM',
-        isha: '08:29 PM',
-      },
-      '2024-03-26': {
-        fajr: '05:33 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:25 PM',
-        maghrib: '07:14 PM',
-        isha: '08:31 PM',
-      },
-      '2024-03-27': {
-        fajr: '05:32 AM',
-        dhuhr: '01:02 PM',
-        asr: '05:26 PM',
-        maghrib: '07:15 PM',
-        isha: '08:32 PM',
-      },
-      '2024-03-28': {
-        fajr: '05:30 AM',
-        dhuhr: '01:01 PM',
-        asr: '05:27 PM',
-        maghrib: '07:16 PM',
-        isha: '08:33 PM',
-      },
-      '2024-03-29': {
-        fajr: '05:28 AM',
-        dhuhr: '01:01 PM',
-        asr: '05:27 PM',
-        maghrib: '07:17 PM',
-        isha: '08:34 PM',
-      }
-    }
-  }
+type PrayerTimesData = {
+  startDate: string;
+  times: CityTimes;
 };
 
 export default function PrayerTimesPage() {
   const { city } = useParams();
-  const cityName = city === 'los-angeles' ? 'Los Angeles' : 'New York City';
-  const cityData = mockPrayerTimes[city as keyof typeof mockPrayerTimes];
-  
+  const cityName = city === 'los-angeles' ? 'Los Angeles' : 
+                  city === 'new-york' ? 'New York City' : 
+                  city === 'austin' ? 'Austin' :
+                  city === 'philadelphia' ? 'Philadelphia' :
+                  city === 'san-francisco' ? 'San Francisco' :
+                  city === 'seattle' ? 'Seattle' :
+                  city === 'karachi' ? 'Karachi' :
+                  'Dhaka';
+
   const [mounted, setMounted] = useState(false);
+  const [prayerTimes, setPrayerTimes] = useState<PrayerTimesData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
-    // Set mounted to true after a brief delay to ensure initial state is invisible
+    const fetchPrayerTimes = async () => {
+      try {
+        const response = await fetch(`/api/prayer-times?city=${city}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch prayer times');
+        }
+        const data = await response.json();
+        setPrayerTimes(data);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load prayer times');
+        console.error('Error fetching prayer times:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPrayerTimes();
+  }, [city]);
+  
+  useEffect(() => {
     const timer = setTimeout(() => {
       setMounted(true);
     }, 50);
@@ -461,27 +68,17 @@ export default function PrayerTimesPage() {
   }, []);
 
   const [currentDate, setCurrentDate] = useState(() => {
-    // Get current device date
     const now = new Date();
-    
-    // Convert to 2025 date for comparison
     const currentYear2025 = new Date(2025, now.getMonth(), now.getDate());
+    const ramadanStart = new Date(2025, 2, 1);
+    const ramadanEnd = new Date(2025, 2, 29);
     
-    // Ramadan 2025 date range
-    const ramadanStart = new Date(2025, 2, 1); // March 1, 2025
-    const ramadanEnd = new Date(2025, 2, 29); // March 29, 2025
-    
-    // If current date is before Ramadan, use start date
     if (currentYear2025 < ramadanStart) {
       return new Date(2024, 2, 1);
     }
-    
-    // If current date is after Ramadan, use end date
     if (currentYear2025 > ramadanEnd) {
       return new Date(2024, 2, 29);
     }
-    
-    // If current date is within Ramadan, use that date
     return new Date(2024, 2, currentYear2025.getDate());
   });
 
@@ -515,10 +112,10 @@ export default function PrayerTimesPage() {
     { date: '2024-03-26', weekday: 'Wednesday' },
     { date: '2024-03-27', weekday: 'Thursday' },
     { date: '2024-03-28', weekday: 'Friday' },
-    { date: '2024-03-29', weekday: 'Saturday' }
+    { date: '2024-03-29', weekday: 'Saturday' },
+    { date: '2024-03-30', weekday: 'Sunday' }
   ];
 
-  // Get current date info
   const dateKey = `2024-03-${String(currentDate.getDate()).padStart(2, '0')}`;
   const currentDateInfo = dates.find(d => d.date === dateKey) || dates[0];
   
@@ -527,28 +124,41 @@ export default function PrayerTimesPage() {
     day: 'numeric'
   }).format(currentDate)}`;
 
-  // Get prayer times for current city and date
-  const times = cityData.times[dateKey] || cityData.times[cityData.startDate];
+  if (isLoading || !prayerTimes) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#fff0e6] to-[#ffe6d1]/30">
+        <div className="text-foreground/70">Loading prayer times...</div>
+      </main>
+    );
+  }
 
-  // Function to navigate to previous day
+  if (error) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#fff0e6] to-[#ffe6d1]/30">
+        <div className="text-red-500">{error}</div>
+      </main>
+    );
+  }
+
+  const times = prayerTimes.times[dateKey] || prayerTimes.times[prayerTimes.startDate];
+
   const goToPreviousDay = () => {
-    const prevDate = new Date(2024, 2, currentDate.getDate() - 1); // Stay in March
+    const prevDate = new Date(2024, 2, currentDate.getDate() - 1);
     if (prevDate.getDate() >= 1) {
       setCurrentDate(prevDate);
     }
   };
 
-  // Function to navigate to next day
   const goToNextDay = () => {
-    const nextDate = new Date(2024, 2, currentDate.getDate() + 1); // Stay in March
+    const nextDate = new Date(2024, 2, currentDate.getDate() + 1);
     if (nextDate.getDate() <= 29) {
       setCurrentDate(nextDate);
     }
   };
 
-  // Calculate Ramadan day based on March 1st start date
   const getRamadanDay = (date: Date) => {
-    return date.getDate(); // Since March 1st is Day 1, the date is the Ramadan day
+    if (city === 'karachi' || city === 'dhaka') return 0;
+    return date.getDate();
   };
 
   return (
@@ -588,11 +198,13 @@ export default function PrayerTimesPage() {
             </button>
             <div className="text-center">
               <h2 className="text-[1.125rem] text-foreground/90 mb-1 text-shadow font-medium">{formattedDate}</h2>
-              <p className="text-primary/90 text-[0.875rem] text-shadow">Ramadan Day {getRamadanDay(currentDate)}</p>
+              {city !== 'karachi' && city !== 'dhaka' && (
+                <p className="text-primary/90 text-[0.875rem] text-shadow">Ramadan Day {getRamadanDay(currentDate)}</p>
+              )}
             </div>
             <button 
               onClick={goToNextDay}
-              disabled={dateKey >= '2024-03-29'}
+              disabled={dateKey >= '2024-03-30'}
               className="p-1.5 -mr-1.5 text-primary/90 hover:text-primary transition-colors disabled:opacity-25 disabled:cursor-not-allowed"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
