@@ -1,5 +1,3 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
@@ -27,8 +25,18 @@ export async function GET(request: Request) {
   }
 
   try {
-    const filePath = path.join(process.cwd(), fileName);
-    const fileContent = await fs.readFile(filePath, 'utf-8');
+    // Get the base URL from the request
+    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+    const host = request.headers.get('host') || 'localhost:3000';
+    const baseUrl = `${protocol}://${host}`;
+    
+    // Fetch the CSV file from the public directory
+    const response = await fetch(`${baseUrl}/data/${fileName}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${fileName}`);
+    }
+    
+    const fileContent = await response.text();
     const lines = fileContent.split('\n');
     
     // Skip header rows
